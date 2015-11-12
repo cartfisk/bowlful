@@ -1,0 +1,40 @@
+#home {
+  background-color: #353535;
+}
+#pets {
+  /* padding-top: 5px; */
+}
+
+p {
+  text-align: center;
+}
+
+.center{
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle {
+  border-radius: 100%;
+  padding: 30px;
+}
+
+.pet {
+  display: block;
+  height: 150px;
+  width: 150px;
+  border: 10px solid #52ac5a;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .3);
+  border-radius: inherit;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#pet01 {
+  border: 10px solid #ff2727;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
