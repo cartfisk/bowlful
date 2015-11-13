@@ -81,7 +81,7 @@
       <div data-role="page" id="home">
         <!-- Header -->
         <div data-role="header">
-          <a href="#settings" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
+          <a href="#nav-panel" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
           <h3>BOWLFUL</h3>
           <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a>
         </div>
@@ -136,13 +136,29 @@
               </fieldset>
             </div>
           </div>
-
-        </div>
       </div>
+      <div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+        <ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px;" class="nav-search">
+          <li data-icon="delete" >
+            <a href="#" data-rel="close">cartfisk</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Manage Pets</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Settings</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Help</a>
+          </li>
+        </ul>
+    </div>
       <!-- /Main Page -->
 
+      <!-- Sidebar Page -->
 
-
+        <!-- panel content goes here -->
+      </div><!-- /panel -->
 
     </body>
 </html>
