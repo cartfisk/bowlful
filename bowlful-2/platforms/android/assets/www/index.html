@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <!--
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
@@ -37,16 +37,17 @@
         <link rel="stylesheet" type ="text/css" href="css/index.css" />
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <title>Bowlful</title>
+
+
+        <title>BOWLFUL</title>
     </head>
 
     <body>
 
       <!-- Login Page -->
-      <div data-role="page" data-dialog="true" id="login">
+      <div data-role="page" data-dialog="true" id="login" >
         <div data-role="header">
-          <h3>Bowlful</h3>
+          <h3>BOWLFUL</h3>
         </div><!-- /header -->
         <div role="main" class="ui-content">
           <ul data-role="fieldcontain" class="ui-hide-label">
@@ -78,10 +79,10 @@
       <!-- /Login Page -->
 
       <!-- Main Page -->
-      <div data-role="page" id="home">
+      <div data-role="page" id="home" data-theme="b">
         <!-- Header -->
         <div data-role="header">
-          <a href="#settings" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
+          <a href="#nav-panel" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
           <h3>BOWLFUL</h3>
           <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a>
         </div>
@@ -92,14 +93,14 @@
               <div id="pets">
                 <div class="circle">
                   <div class="pet" id="00">
-                    <a href="#confirm" data-rel="popup" data-position-to="window" data-transition="pop">
-                      <img class="img-circle" src=img/images.jpeg />
+                    <a id = "pet00" href="#">
+                        <img class="img-circle" src=img/images.jpg />
                     </a>
                   </div>
                   <div class="circle">
                     <div class="pet" id="pet01">
                       <a href="#confirm" data-rel="popup" data-position-to="window" data-transition="pop">
-                        <img class="img-circle" src=img/images-2.jpeg />
+                        <img class="img-circle" src=img/images-2.jpg />
                       </a>
                     </div>
                   </div>
@@ -136,13 +137,34 @@
               </fieldset>
             </div>
           </div>
-
-        </div>
       </div>
+      <div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="b">
+        <ul data-role="listview" data-theme="b" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+          <li data-icon="delete" >
+            <a href="#" data-rel="close">cartfisk</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Manage Pets</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Settings</a>
+          </li>
+          <li data-filtertext="">
+            <a href="">Help</a>
+          </li>
+        </ul>
+    </div>
       <!-- /Main Page -->
 
+      <!-- Sidebar Page -->
 
+        <!-- panel content goes here -->
+      </div><!-- /panel -->
 
+      <script type="text/javascript" src="js/index.js"></script>
 
     </body>
+
+
+
 </html>

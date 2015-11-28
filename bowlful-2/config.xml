@@ -9,18 +9,29 @@
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="cordova-plugin-dialogs"/>
+
+
+
     <access origin="*" />
+
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <plugin name="Notification" value="org.apache.cordova.Notification"/>
+    <plugin name="File" value="org.apache.cordova.File"/>
+    <plugin name="Dialogs" value="org.apache.cordova.Dialogs"/>
     <platform name="android">
-        <allow-intent href="market:*" />
+    <allow-intent href="market:*" />
     </platform>
+
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-    </platform>
+        <plugin name="Notification" value="CDVNotification" />
+      </platform>
+
 </widget>
