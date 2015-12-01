@@ -33,16 +33,12 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" type ="text/css" href="css/index.css" />
-
-
-
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <title>BOWLFUL</title>
     </head>
 
     <body>
-
       <!-- Login Page -->
       <div data-role="page" data-dialog="true" id="login" >
         <div data-role="header">
@@ -76,6 +72,29 @@
         </div>
       </div>
       <!-- /Login Page -->
+
+      <!-- Camera Page -->
+      <div data-role="page" id="camera">
+        <div data-role="header">
+          <h3>Pet Photo</h3>
+          <a href="#home"  class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="pop" ></a>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+          <input type="button" id="takePhoto" data-icon="camera" value="Take Photo" />
+          <div id="photo">
+            <img id="imageView" style="width: 100%;"></img>
+
+          </div><!-- /photo -->
+          <div data-role="popup" id="photoSelector" style="min-width: 250px;">
+            <ul data-role="listview" data-inset="true">
+              <li data-role="divider">Choose Photo</li>
+              <li><a id="cameraPhoto" href="#">Take Photo with Camera</a></li>
+              <li><a id="galleryPhoto" href="#">Get Photo from Gallery</a></li>
+            </ul>
+          </div><!-- /photoSelector -->
+        </div><!-- /content -->
+      </div>
 
       <!-- Main Page -->
       <div data-role="page" id="home" data-theme="b">
@@ -129,8 +148,8 @@
                 <label for="name"></label>
                 <input type="text" name="name" id="name" placeholder="Name" value=""/>
               </form>
-              <button class="ui-btn ui-corner-all ui-shadow">Add Photo</button>
-              <fieldset data-role="controlgroup" data-type="horizontal">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                 <a href="#camera" data-role="button"  data-corners="false" >Add a photo</a>
                 <a href="" class="ui-btn ui-corner-all ui-shadow" data-rel="back">Cancel</button></a>
                 <button class="ui-btn ui-corner-all ui-shadow">Done</button>
               </fieldset>
@@ -153,19 +172,16 @@
           </li>
         </ul>
     </div>
-      <!-- /Main Page -->
+  <!-- /Main Page -->
 
-      <!-- Sidebar Page -->
 
-        <!-- panel content goes here -->
-      </div><!-- /panel -->
-      <script type="text/javascript" src="cordova.js"></script>
-      <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-      <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
 
-      <script type="text/javascript" src="js/index.js"></script>
 
-    </body>
+          <script type="text/javascript" src="cordova.js"></script>
+          <script src="js/jquery-2.1.4.min.js"></script>
+          <script src="js/jquery.mobile-1.4.5.min.js"></script>
+          <script type="text/javascript" src="js/index.js"></script>
+</body>
 
 
 
