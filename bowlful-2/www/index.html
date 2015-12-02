@@ -26,20 +26,20 @@
         </div>
         <!-- /Header -->
         <div role="main" class="ui-content">
-          <div id="insert">
-            <button class="ui-btn ui-corner-all" id="tester">Test</button>
+          <div id="insert" class="pets">
+
           </div>
         </div>
 
-          <div data-role="popup" id="confirm" data-overlay-theme="b" data-theme="b" style="max-width:400px;">
+          <div data-role="popup" id="confirm" data-overlay-theme="b" data-theme="b" data-transistion="fade" style="max-width:400px;">
             <div data-role="header" id="confirmHeader">
               <h1></h1>
             </div>
             <div role="main" class="ui-content">
-              <p class="ui-title">Last fed: 9:30am today</p>
+              <p id="lastfed" class="ui-title"></p>
               <fieldset data-role="controlgroup" data-type="horizontal">
                 <a href="" id="cancel" class="ui-btn ui-corner-all ui-shadow" data-rel="back">Cancel</a>
-                <a href="#" id="feed" class="ui-btn ui-corner-all ui-shadow" data-rel="back" data-transition="flow">Feed</a>
+                <button id="feed" class="ui-btn ui-corner-all ui-shadow">Feed</button>
               </fieldset>
             </div>
           </div>
