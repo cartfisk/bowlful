@@ -49,25 +49,26 @@
         this.photo = photo;
         this.id = id;
         this.lastFed = new LastFed();
-        this.needsAction = function() {
-          //this.lastFed.status = 2;
-          $("#pet" + id).removeClass("green");
-          $("#pet" + id).removeClass("yellow");
-          $("#pet" + id).addClass("red");
-        };
-        this.neutral = function() {
-          //this.lastFed.status = 1;
-          $("#pet" + id).removeClass("red");
-          $("#pet" + id).removeClass("green");
-          $("#pet" + id).addClass("yellow");
-        };
-        this.fed = function() {
-          //this.lastFed.status = 0;
-          $("#pet" + id).removeClass("red");
-          $("#pet" + id).removeClass("yellow");
-          $("#pet" + id).addClass("green");
-        };
       }
+
+      Pet.prototype.needsAction = function() {
+        this.lastFed.status = 2;
+        $("#pet" + this.id).removeClass("green");
+        $("#pet" + this.id).removeClass("yellow");
+        $("#pet" + this.id).addClass("red");
+      };
+      Pet.prototype.neutral = function() {
+        this.lastFed.status = 1;
+        $("#pet" + this.id).removeClass("red");
+        $("#pet" + this.id).removeClass("green");
+        $("#pet" + this.id).addClass("yellow");
+      };
+      Pet.prototype.fed = function() {
+        this.lastFed.status = 0;
+        $("#pet" + this.id).removeClass("red");
+        $("#pet" + this.id).removeClass("yellow");
+        $("#pet" + this.id).addClass("green");
+      };
 
       /*function UpdatePetStatus(currentDate) {
           var currentTime = 60*currentDate.getHours() + currentDate.getMinutes();
@@ -126,7 +127,7 @@
 
       function addPet() {
         $("#addPet").popup("close");
-        petQuantity++;
+        petQuantity += 1;
         var id = petQuantity;
         var name = $("#newPetName").val();
         var photo = "";
@@ -150,16 +151,18 @@
       }
 
       function Feed(id) {
-        pets[id].lastFed = UpdateLastFed(new Date());
-        $("#lastfed").html("Last fed: just now");
-      }
-
-      function Feed(id, date) {
         pets[id].lastFed = UpdateLastFed();
         $("#lastfed").html("Last fed: just now");
       }
 
-      function UpdateLastFed(date) {
+      /*function Feed(id, date) {
+        pets[id].lastFed = UpdateLastFed();
+        $("#lastfed").html("Last fed: just now");
+      }*/
+
+      function UpdateLastFed() {
+        var date = new Date();
+        var currentTime = 60 * date.getHours() + date.getMinutes();
         var newLastFed = new LastFed();
         newLastFed.date = date;
         newLastFed.year = date.getFullYear();
@@ -240,18 +243,18 @@
 
       $("#addPetConfirm").on("tap", function(e){
         addPet();
-      })
+      });
 
       $(".pets").on("tap", ".pet", function(e){
         e.preventDefault();
         currentPet = parseInt($(this).attr("id").substring(3));
         FeedDialog(currentPet);
-      })
+      });
 
       $("#feed").on("tap", function(e){
         var id = parseInt($(this).attr("id").substring(3));
         Feed(currentPet);
-      })
+      });
 
       //onLaunch();
     }
