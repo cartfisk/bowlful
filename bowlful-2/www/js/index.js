@@ -10,7 +10,7 @@
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
         morning: 540, //9am
-        evening: 1020 //5pm
+        evening: 1140 //7pm
       };
       var imageTemp;
 
@@ -21,10 +21,10 @@
       function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
         var date1, date2, current;
         testAddPet("Jack");
-        date1 = new Date(2015, 11, 1, 20, 0, 0, 0);
+        date1 = new Date('December 1, 2015 17:00:00');
         testFeed(0, date1);
         testAddPet("Goob");
-        date2 = new Date(2015, 11, 1, 9, 0, 0, 0);
+        date2 = new Date('December 2, 2015 09:00:00');
         testFeed(1, date2);
         current = new Date();
         UpdatePetStatus(current);
@@ -145,7 +145,7 @@
         var id = petQuantity;
         var photo = "";
         pets[id] = new Pet(name,photo,id);
-        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
+        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-" + id + ".jpg' /> </div>");
         $("#addPet").popup("close");
       }
 
@@ -157,20 +157,18 @@
 
       function Feed(id) {
         var date = new Date();
-        pets[id].lastFed = UpdateLastFed();
+        pets[id].lastFed = UpdateLastFed(date);
         pets[id].fed();
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
 
       function testFeed(id, date) {
-        pets[id].lastFed = UpdateLastFed();
-        $("#lastfed").html("Last fed: just now");
-
+        pets[id].lastFed = UpdateLastFed(date);
+        //$("#lastfed").html("Last fed: just now");
       }
 
-      function UpdateLastFed() {
-        var date = new Date();
+      function UpdateLastFed(date) {
         var currentTime = 60 * date.getHours() + date.getMinutes();
         var newLastFed = new LastFed();
         newLastFed.date = date;
