@@ -1,22 +1,10 @@
 (function () {
-  $(document).on("pageinit", "#login", function(e) {
+  $(document).on("pageinit", "#home", function(e) {
 		//prevent any bound defaults
 		e.preventDefault();
 		//loader function after deviceready event returns
 		function onDeviceReady() {
-      // For native dialog... We can chose where we want to use it
-      /*
-      function onConfirm(buttonIndex){
-        alert("You have selected button"+ buttonIndex);
-      }
-      navigator.notification.confirm(
-        "You win",
-        onConfirm,
-        "Game over",
-        ["Restart","Exit"]
-      )
-      */
-//-----------------------------------------------------
+
       var pets = [];
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
@@ -24,6 +12,7 @@
         morning: 540, //9am
         evening: 1020 //5pm
       };
+      var imageTemp;
 
       //use indexedDB to retrieve these values on launch
       var currentPet = -1;
@@ -33,7 +22,7 @@
         var date1, date2, current;
         testAddPet("Jack");
         date1 = new Date(2015, 11, 1, 20, 0, 0, 0);
-        //testFeed(0, date1);
+        testFeed(0, date1);
         testAddPet("Goob");
         date2 = new Date(2015, 11, 1, 9, 0, 0, 0);
         testFeed(1, date2);
@@ -146,9 +135,9 @@
         petQuantity += 1;
         var id = petQuantity;
         var name = $("#newPetName").val();
-        var photo = "";
+        var photo = imageTemp;
         pets[id] = new Pet(name,photo,id);
-        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
+        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
       }
 
       function testAddPet(name) {
@@ -261,8 +250,22 @@
         return newLastFed;
       }
 
+      function onSuccess(imageData){
+        imageTemp = imageData;
+        $("body").pagecontainer("change", "#home", {transition: "fade"});
+      }
+
+      function onFail(message){
+        navigator.notification.alert("Failed because: " + message);
+      }
+
+      $( 'body' ).on( 'pagecontainertransition', function( event, ui ) {
+        if(ui.toPage[0] == $('#home')[0] ) {
+          $("#addPet").popup("open");
+        }
+      });
+
       $("#addPetConfirm").on("tap", function(e){
-        navigator.notification.alert("Addpet has been clicked");
         addPet();
       });
 
@@ -273,48 +276,38 @@
       });
 
       $("#feed").on("tap", function(e){
-        var id = parseInt($(this).attr("id").substring(3));
         Feed(currentPet);
       });
-        onLaunch();
-//----------------------------------------------------------------------
-        //Week 9 slide 11
+
       $("#takePhoto").on("tap",function(e){
         e.preventDefault();
         $("#photoSelector").popup("open");
-      })
+      });
 
       $("#cameraPhoto").on("tap",function(e){
           e.preventDefault();
           $("#photoSelector").popup("close");
           navigator.camera.getPicture(onSuccess, onFail, {
-            quality: 50,
+            quality: 70,
 
             sourceType: Camera.PictureSourceType.CAMERA,
             destinationType: Camera.DestinationType.FILE_URI
           });
-        })
-
-    function onSuccess(imageData){
-      var image = document.getElementById('imageView');
-      image.src = imageData;
-    }
-    function onFail(message){
-      navigator.notification.alert("Failed because: " + message);
-    }
-    $("#galleryPhoto").on("tap",function(e){
-      e.preventDefault();
-      $("#photoSelector").popup("close");
-      navigator.camera.getPicture(onSuccess,onFail,{
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: Camera.DestinationType.FILE_URI
       });
-    })
 
-}
-//On device ready function closes
-//as deviceready returns load onDeviceReady()
+      $("#galleryPhoto").on("tap",function(e){
+        e.preventDefault();
+        $("#photoSelector").popup("close");
+        navigator.camera.getPicture(onSuccess,onFail,{
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+          destinationType: Camera.DestinationType.FILE_URI
+        });
+      });
+
+      onLaunch();
+    }
+    		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
-  });//closing document init
+  });
 
-})(); //parent function
+})();
