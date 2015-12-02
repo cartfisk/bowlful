@@ -15,22 +15,24 @@
 
       //use indexedDB to retrieve these values on launch
       var currentPet = -1;
-      //var tick = setInterval(onTick, 10000);
+      //var tick = window.setInterval(onTick, 10000);
 
-      /*function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
-        var date;
-        addPet("Jack");
-        date = new Date(2015, 11, 1, 20, 0, 0, 0);
-        Feed(0, date);
-        addPet("Goob");
-        date = new Date(2015, 11, 1, 9, 0, 0, 0);
-        Feed(1, date);
+      function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
+        var date1, date2, current;
+        testAddPet("Jack");
+        date1 = new Date(2015, 11, 1, 20, 0, 0, 0);
+        //testFeed(0, date1);
+        testAddPet("Goob");
+        date2 = new Date(2015, 11, 1, 9, 0, 0, 0);
+        testFeed(1, date2);
+        current = new Date();
+        UpdatePetStatus(current);
       }
 
       function onTick(){
-        var currentDate = new Date();
-        UpdatePets(currentDate);
-      }*/
+        var date = new Date();
+        UpdatePets(date);
+      }
 
       function LastFed(){
         this.date = "";
@@ -70,13 +72,13 @@
         $("#pet" + this.id).addClass("green");
       };
 
-      /*function UpdatePetStatus(currentDate) {
+      function UpdatePetStatus(currentDate) {
           var currentTime = 60*currentDate.getHours() + currentDate.getMinutes();
           var morning;
-          if ((Math.abs(currentTime-feedTimes.morning)) < (Math.abs(currentTime-feedTimes.evening)) {
+          if ((Math.abs(currentTime-feedTimes.morning)) < (Math.abs(currentTime-feedTimes.evening))) {
             morning = true;
           }
-          else if ((Math.abs(currentTime-feedTimes.morning)) > (Math.abs(currentTime-feedTimes.evening)){
+          else if ((Math.abs(currentTime-feedTimes.morning)) > (Math.abs(currentTime-feedTimes.evening))){
             morning = false;
           }
           var pastFeedTime;
@@ -88,17 +90,18 @@
               else if (currentTime < feedTimes.morning){ //if it's before morning feed time
                 pastFeedTime = false;
               }
-              for (i=0;i<pets.length;i++) {  //for each pet
-                if (pastFeedTime && (pets[i].lastFed.date != currentDate.getDate())) { //if past feed time and pet has not been fed today
+              for (i=0;i<pets.length;i+=1) {  //for each pet
+                if (pastFeedTime && (pets[i].lastFed.date !== currentDate.getDate())) { //if past feed time and pet has not been fed today
                   pets[i].needsAction(); //pet needs to be fed
                 }
-                else if (pets[i].lastFed.date == currentDate.getDate()) { //if pet has been fed today and it's morning the pet is okay
+                else if (pets[i].lastFed.date === currentDate.getDate()) { //if pet has been fed today and it's morning the pet is okay
                   pets[i].fed();
                 }
-                else if (!pastFeedTime && !pets[i]lastFed.morning) { //if it's not past feed time and it hasn't been fed this morning
+                else if (!pastFeedTime && !pets[i].lastFed.morning) { //if it's not past feed time and it hasn't been fed this morning
                   pets[i].neutral();
                 }
               }
+              break;
             case false: //if it's evening
               if (currentTime > feedTimes.evening) { //if it's past evening feed time
                 pastFeedTime = true;
@@ -106,8 +109,8 @@
               else if (currentTime < feedTimes.evening) { //if it's before evening feed time
                 pastFeedTime = false;
               }
-              for (i=0;i<pets.length;i++) {
-                if (pastFeedTime && (pets[i].lastFed.date == currentDate.getDate())) { //if past feed time and pet has been fed today
+              for (i=0;i<pets.length;i+=1) {
+                if (pastFeedTime && (pets[i].lastFed.date === currentDate.getDate())) { //if past feed time and pet has been fed today
                   if (pets[i].lastFed.morning) { //if pet hasn't been fed this evening
                     pets[i].needsAction();  //pet needs to be fed
                   }
@@ -115,15 +118,16 @@
                     pets[i].fed();
                   }
                 }
-                else if (pets[i].lastFed.date != currentDate.getDate()) { //if pet was not fed today
+                else if (pets[i].lastFed.date !== currentDate.getDate()) { //if pet was not fed today
                   pets[i].needsAction();
                 }
-                else if (!pastFeedTime && (pets[i].lastFed.date == currentDate.getDate()) && pets[i].lastFed.morning {
+                else if (!pastFeedTime && ((pets[i].lastFed.date === currentDate.getDate()) && pets[i].lastFed.morning)) {
                   pets[i].neutral();
                 }
               }
+              break;
           }
-      }*/
+      }
 
       function addPet() {
         $("#addPet").popup("close");
@@ -135,14 +139,14 @@
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
       }
 
-      /*function addPet(name) {
+      function testAddPet(name) {
         petQuantity += 1;
         var id = petQuantity;
         var photo = "";
         pets[id] = new Pet(name,photo,id);
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
         $("#addPet").popup("close");
-      }*/
+      }
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
@@ -151,14 +155,18 @@
       }
 
       function Feed(id) {
+        var date = new Date();
         pets[id].lastFed = UpdateLastFed();
+        pets[id].fed();
         $("#lastfed").html("Last fed: just now");
+        $("#confirm").popup("close");
       }
 
-      /*function Feed(id, date) {
+      function testFeed(id, date) {
         pets[id].lastFed = UpdateLastFed();
         $("#lastfed").html("Last fed: just now");
-      }*/
+
+      }
 
       function UpdateLastFed() {
         var date = new Date();
@@ -256,7 +264,7 @@
         Feed(currentPet);
       });
 
-      //onLaunch();
+      onLaunch();
     }
     		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
