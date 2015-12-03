@@ -11,7 +11,7 @@
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
         morning: 540, //9am
-        evening: 1160 //7:20pm
+        evening: 1080 //7:20pm
       };
       var imageTemp;
 
