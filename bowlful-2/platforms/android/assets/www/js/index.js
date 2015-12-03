@@ -272,6 +272,11 @@
 
       $("#addPetConfirm").on("tap", function(e){
         addPet();
+        var stringThis = JSON.stringify(pets);
+        localStorage.setItem("pet",stringThis);
+        alert(stringThis);
+
+        alert("Storing pets");
       });
 
       $(".pets").on("tap", ".pet", function(e){
@@ -310,9 +315,9 @@
 
 
       $("#save").on("tap",function(e){
+        alert(petString[0]);
 
-
-      });
+        });
 
 
 
@@ -325,15 +330,20 @@
     $(document).on("resume",onResume);
     }
     function onPause(){
-    localStorage.setItem("pets",JSON.stringify(pets));
+
+
     }
+
+
   function onResume(){
+    navigator.notification.alert("Resuming now....");
     var pet1 = localStorage.getItem("pets");
+    alert(pet1);
+
     petString = JSON.parse(pet1);
-    for(i = 0; i < petString.length; i++)
-    {
-      alert(petString[i].name);
-    }
+    alert(petString);
+
+
 
     }
     		//as deviceready returns load onDeviceReady()
