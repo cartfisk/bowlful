@@ -14,16 +14,20 @@
   height: inherit;
   width: inherit;
   border-radius: 50%;
+  object-fit: contain; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 100px;
+  width: 100px;
 }
 
 .green {
-  border: 8px solid #52ac5a;
+  border: 8px solid #b3ff66;
 }
 
 .red {
-  border: 8px solid #ff2727;
+  border: 8px solid #ff6666;
 }
 
 .yellow {
-  border: 8px solid yellow;
+  border: 8px solid #ffff4d;
 }
