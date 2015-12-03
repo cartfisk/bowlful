@@ -53,6 +53,11 @@ module.exports = [
         "clobbers": [
             "CameraPopoverHandle"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-indexedDB/www/IndexedDBShim.min.js",
+        "id": "cordova-plugin-indexedDB.IndexedDBShim",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -61,7 +66,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.0.0",
     "cordova-plugin-dialogs": "1.1.1",
     "cordova-plugin-device": "1.1.0",
-    "cordova-plugin-camera": "1.2.0"
+    "cordova-plugin-camera": "1.2.0",
+    "cordova-plugin-indexedDB": "0.1.2"
 }
 // BOTTOM OF METADATA
 });

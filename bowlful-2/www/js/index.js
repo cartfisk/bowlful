@@ -6,6 +6,7 @@
 		function onDeviceReady() {
 
       var pets = [];
+      var petString = [];
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
@@ -17,7 +18,7 @@
       //use indexedDB to retrieve these values on launch
       var currentPet = -1;
       //var tick = window.setInterval(onTick, 10000);
-
+/*
       function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
         var date1, date2, current;
         testAddPet("Jack");
@@ -29,7 +30,7 @@
         current = new Date();
         UpdatePetStatus(current);
       }
-
+*/
       function onTick(){
         var date = new Date();
         UpdatePets(date);
@@ -139,7 +140,7 @@
         pets[id] = new Pet(name,photo,id);
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
       }
-
+/*
       function testAddPet(name) {
         petQuantity += 1;
         var id = petQuantity;
@@ -148,6 +149,7 @@
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-" + id + ".jpg' /> </div>");
         $("#addPet").popup("close");
       }
+      */
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
@@ -162,11 +164,13 @@
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
+/*
 
       function testFeed(id, date) {
         pets[id].lastFed = UpdateLastFed(date);
         //$("#lastfed").html("Last fed: just now");
       }
+      */
 
       function UpdateLastFed(date) {
         var currentTime = 60 * date.getHours() + date.getMinutes();
@@ -263,6 +267,7 @@
         }
       });
 
+
       $("#addPetConfirm").on("tap", function(e){
         addPet();
       });
@@ -286,8 +291,7 @@
           e.preventDefault();
           $("#photoSelector").popup("close");
           navigator.camera.getPicture(onSuccess, onFail, {
-            quality: 70,
-
+            quality: 60,
             sourceType: Camera.PictureSourceType.CAMERA,
             destinationType: Camera.DestinationType.FILE_URI
           });
@@ -302,7 +306,34 @@
         });
       });
 
-      onLaunch();
+
+      $("#save").on("tap",function(e){
+        //for (i=0;i<pets.length;i+=1){
+        //  alert(JSON.stringify(pets[i]));
+          //var pet = JSON.stringify(pets[i]);
+          //petString[i] = pet;
+          //localStorage.set("pet#", pet)
+          //localStorage.setItem("pet#"+i, pet)
+        //}
+        localStorage["pets"]= JSON.stringify(pets);
+        alert("Pets have been saved.");
+        var med = localStorage.getItem(["pets"]);
+        var result = JSON.parse(med);
+        alert("Parse complete");
+        alert(result.name);
+
+
+
+
+      });
+
+
+
+
+
+
+
+    //  onLaunch();
     }
     		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);

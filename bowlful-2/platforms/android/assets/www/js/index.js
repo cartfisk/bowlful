@@ -1,46 +1,36 @@
 (function () {
-  $(document).on("pageinit", "#login", function(e) {
+  $(document).on("pageinit", "#home", function(e) {
 		//prevent any bound defaults
 		e.preventDefault();
 		//loader function after deviceready event returns
 		function onDeviceReady() {
-      // For native dialog... We can chose where we want to use it
-      /*
-      function onConfirm(buttonIndex){
-        alert("You have selected button"+ buttonIndex);
-      }
-      navigator.notification.confirm(
-        "You win",
-        onConfirm,
-        "Game over",
-        ["Restart","Exit"]
-      )
-      */
-//-----------------------------------------------------
+
       var pets = [];
+      var petString = [];
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
         morning: 540, //9am
-        evening: 1020 //5pm
+        evening: 1160 //7:20pm
       };
+      var imageTemp;
 
       //use indexedDB to retrieve these values on launch
       var currentPet = -1;
       //var tick = window.setInterval(onTick, 10000);
-
+/*
       function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
         var date1, date2, current;
         testAddPet("Jack");
-        date1 = new Date(2015, 11, 1, 20, 0, 0, 0);
-        //testFeed(0, date1);
+        date1 = new Date('December 1, 2015 17:00:00');
+        testFeed(0, date1);
         testAddPet("Goob");
-        date2 = new Date(2015, 11, 1, 9, 0, 0, 0);
+        date2 = new Date('December 2, 2015 09:00:00');
         testFeed(1, date2);
         current = new Date();
         UpdatePetStatus(current);
       }
-
+*/
       function onTick(){
         var date = new Date();
         UpdatePets(date);
@@ -146,19 +136,20 @@
         petQuantity += 1;
         var id = petQuantity;
         var name = $("#newPetName").val();
-        var photo = "";
+        var photo = imageTemp;
         pets[id] = new Pet(name,photo,id);
-        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
+        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
       }
-
+/*
       function testAddPet(name) {
         petQuantity += 1;
         var id = petQuantity;
         var photo = "";
         pets[id] = new Pet(name,photo,id);
-        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-2.jpg' /> </div>");
+        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-" + id + ".jpg' /> </div>");
         $("#addPet").popup("close");
       }
+      */
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
@@ -168,20 +159,20 @@
 
       function Feed(id) {
         var date = new Date();
-        pets[id].lastFed = UpdateLastFed();
+        pets[id].lastFed = UpdateLastFed(date);
         pets[id].fed();
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
+/*
 
       function testFeed(id, date) {
-        pets[id].lastFed = UpdateLastFed();
-        $("#lastfed").html("Last fed: just now");
-
+        pets[id].lastFed = UpdateLastFed(date);
+        //$("#lastfed").html("Last fed: just now");
       }
+      */
 
-      function UpdateLastFed() {
-        var date = new Date();
+      function UpdateLastFed(date) {
         var currentTime = 60 * date.getHours() + date.getMinutes();
         var newLastFed = new LastFed();
         newLastFed.date = date;
@@ -261,8 +252,23 @@
         return newLastFed;
       }
 
+      function onSuccess(imageData){
+        imageTemp = imageData;
+        $("body").pagecontainer("change", "#home", {transition: "fade"});
+      }
+
+      function onFail(message){
+        navigator.notification.alert("Failed because: " + message);
+      }
+
+      $( 'body' ).on( 'pagecontainertransition', function( event, ui ) {
+        if(ui.toPage[0] == $('#home')[0] ) {
+          $("#addPet").popup("open");
+        }
+      });
+
+
       $("#addPetConfirm").on("tap", function(e){
-        navigator.notification.alert("Addpet has been clicked");
         addPet();
       });
 
@@ -273,48 +279,64 @@
       });
 
       $("#feed").on("tap", function(e){
-        var id = parseInt($(this).attr("id").substring(3));
         Feed(currentPet);
       });
-        onLaunch();
-//----------------------------------------------------------------------
-        //Week 9 slide 11
+
       $("#takePhoto").on("tap",function(e){
         e.preventDefault();
         $("#photoSelector").popup("open");
-      })
+      });
 
       $("#cameraPhoto").on("tap",function(e){
           e.preventDefault();
           $("#photoSelector").popup("close");
           navigator.camera.getPicture(onSuccess, onFail, {
-            quality: 50,
-
+            quality: 60,
             sourceType: Camera.PictureSourceType.CAMERA,
             destinationType: Camera.DestinationType.FILE_URI
           });
-        })
-
-    function onSuccess(imageData){
-      var image = document.getElementById('imageView');
-      image.src = imageData;
-    }
-    function onFail(message){
-      navigator.notification.alert("Failed because: " + message);
-    }
-    $("#galleryPhoto").on("tap",function(e){
-      e.preventDefault();
-      $("#photoSelector").popup("close");
-      navigator.camera.getPicture(onSuccess,onFail,{
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: Camera.DestinationType.FILE_URI
       });
-    })
 
-}
-//On device ready function closes
-//as deviceready returns load onDeviceReady()
+      $("#galleryPhoto").on("tap",function(e){
+        e.preventDefault();
+        $("#photoSelector").popup("close");
+        navigator.camera.getPicture(onSuccess,onFail,{
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+          destinationType: Camera.DestinationType.FILE_URI
+        });
+      });
+
+
+      $("#save").on("tap",function(e){
+        //for (i=0;i<pets.length;i+=1){
+        //  alert(JSON.stringify(pets[i]));
+          //var pet = JSON.stringify(pets[i]);
+          //petString[i] = pet;
+          //localStorage.set("pet#", pet)
+          //localStorage.setItem("pet#"+i, pet)
+        //}
+        localStorage["pets"]= JSON.stringify(pets);
+        alert("Pets have been saved.");
+        var med = localStorage.getItem(["pets"]);
+        var result = JSON.parse(med);
+        alert("Parse complete");
+        alert(result.name);
+
+
+
+
+      });
+
+
+
+
+
+
+
+    //  onLaunch();
+    }
+    		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
-  });//closing document init
+  });
 
-})(); //parent function
+})();

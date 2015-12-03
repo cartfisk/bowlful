@@ -51,6 +51,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.highquality.bowlful"
+        },
+        "cordova-plugin-indexedDB": {
+            "PACKAGE_NAME": "com.highquality.bowlful"
         }
     },
     "dependent_plugins": {}
