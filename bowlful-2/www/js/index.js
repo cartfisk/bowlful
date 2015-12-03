@@ -5,8 +5,10 @@
 		//loader function after deviceready event returns
 		function onDeviceReady() {
 
+
+
       var pets = [];
-      var petString = [];
+
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
@@ -308,29 +310,6 @@
 
 
       $("#save").on("tap",function(e){
-      //  for (i=0;i<pets.length;i+=1){
-        // alert(JSON.stringify(pets[i]));
-        //  var pet = JSON.stringify(pets[i]);
-
-          //localStorage.setItem(pets[i].name, pet);
-
-        //}
-
-      localStorage.setItem("pets",JSON.stringify(pets));
-      alert(JSON.stringify(pets));
-      var pet1 = localStorage.getItem("pets");
-      pets = JSON.parse(pet1);
-      for(i = 0; i < pets.length; i++)
-      {
-        alert(pets[i].name);
-      }
-
-        alert("Pets have been saved.");
-
-
-
-
-
 
 
       });
@@ -342,9 +321,25 @@
 
 
     //  onLaunch();
+    $(document).on("pause",onPause);
+    $(document).on("resume",onResume);
+    }
+    function onPause(){
+    localStorage.setItem("pets",JSON.stringify(pets));
+    }
+  function onResume(){
+    var pet1 = localStorage.getItem("pets");
+    petString = JSON.parse(pet1);
+    for(i = 0; i < petString.length; i++)
+    {
+      alert(petString[i].name);
+    }
+
     }
     		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
+
+
   });
 
 })();
