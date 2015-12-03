@@ -11,7 +11,7 @@
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
         morning: 540, //9am
-        evening: 1160 //7:20pm
+        evening: 1080 //7:20pm
       };
       var imageTemp;
 
@@ -308,19 +308,24 @@
 
 
       $("#save").on("tap",function(e){
-        //for (i=0;i<pets.length;i+=1){
-        //  alert(JSON.stringify(pets[i]));
-          //var pet = JSON.stringify(pets[i]);
-          //petString[i] = pet;
-          //localStorage.set("pet#", pet)
-          //localStorage.setItem("pet#"+i, pet)
+      //  for (i=0;i<pets.length;i+=1){
+        // alert(JSON.stringify(pets[i]));
+        //  var pet = JSON.stringify(pets[i]);
+
+          //localStorage.setItem(pets[i].name, pet);
+
         //}
-        localStorage["pets"]= JSON.stringify(pets);
+
+      localStorage.setItem("pets",JSON.stringify(pets));
+      alert(JSON.stringify(pets));
+      var pet1 = localStorage.getItem("pets");
+      pets = JSON.parse(pet1);
+      alert(pets.id);
+
         alert("Pets have been saved.");
-        var med = localStorage.getItem(["pets"]);
-        var result = JSON.parse(med);
-        alert("Parse complete");
-        alert(result.name);
+
+
+
 
 
 
