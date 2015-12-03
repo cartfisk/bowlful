@@ -320,7 +320,10 @@
       alert(JSON.stringify(pets));
       var pet1 = localStorage.getItem("pets");
       pets = JSON.parse(pet1);
-      alert(pets.id);
+      for(i = 0; i < pets.length; i++)
+      {
+        alert(pets[i].name);
+      }
 
         alert("Pets have been saved.");
 
