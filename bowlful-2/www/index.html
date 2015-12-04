@@ -107,18 +107,64 @@
       <div data-role="page" id="managePets">
         <!-- Header -->
         <div data-role="header">
-          <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button>
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
           <h3>Manage Pets</h3>
 
-          <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
         </div>
         <button id="save" class="ui-btn ui-corner-all ui-shadow">Save</button>
+        <!-- Placeholders entered by Matty and Dave, 2015/12/03. -->
+        <button id="add" class="ui-btn ui-corner-all ui-shadow">Add</button>
+        <button id="remove" class="ui-btn ui-corner-all ui-shadow">Remove</button>
         <!-- /Header -->
       </div>
       <!-- /Manage Pets Page -->
       <!-- Settings Page -->
+      <div data-role="page" id="settings">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <!-- <a href="#nav-panel" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Settings</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+        </div>
+        <!-- /Header -->
+        <!-- Body -->
+        <div role="main" class="ui-content">
+          <!-- <p id="feedTime1" class="ui-title">Feed Time 1:</p> -->
+          <form id="feed1">
+            Feed Time 1:
+            <input type="time" name="feedTime1">
+          </form>
+          <form id="feed2">
+            Feed Time 2:
+            <input type="time" name="feedTime2">
+          </form>
+        </div>
+        <!-- /Body -->
+      </div>
       <!-- /Settings Page -->
       <!-- Help Page -->
+      <div data-role="page" id="help">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <!-- <a href="#settings" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Help</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+        </div>
+        <!-- /Header -->
+        <!-- Body -->
+        <div role="main" class="ui-content">
+          <p id="helpText">
+            This is the help page. For help, please contact Matt Baumann, any time, day or night! ;-)
+          </p>
+        </div>
+        <!-- /Body -->
+      </div>
       <!-- /Help Page -->
     </body>
 </html>
