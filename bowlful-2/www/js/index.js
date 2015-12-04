@@ -154,7 +154,7 @@
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
-        $("#lastfed").html("Last fed: " + pets[id].lastFed.day);
+        $("#lastfed").html("Last fed: " + date.getHours() +":"+ date.getMinutes() +" // "+ pets[id].lastFed.day);
         $("#confirm").popup("open");
       }
 
