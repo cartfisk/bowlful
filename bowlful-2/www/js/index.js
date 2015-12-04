@@ -328,30 +328,25 @@
         Feed(currentPet);
       });
 
-      $("#takePhoto").on("tap",function(e){
-        e.preventDefault();
-        $("#photoSelector").popup("open");
-      });
-
       $("#cameraPhoto").on("tap",function(e){
           e.preventDefault();
-          $("#photoSelector").popup("close");
+          //$("#photoSelector").popup("close");
           navigator.camera.getPicture(onSuccess, onFail, {
             quality: 60,
             sourceType: Camera.PictureSourceType.CAMERA,
-            destinationType: Camera.DestinationType.FILE_URI
+            destinationType: Camera.DestinationType.FILE_URI,
+            correctOrientation: true
           });
       });
 
       $("#galleryPhoto").on("tap",function(e){
         e.preventDefault();
-        $("#photoSelector").popup("close");
+        //$("#photoSelector").popup("close");
         navigator.camera.getPicture(onSuccess,onFail,{
           sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
           destinationType: Camera.DestinationType.FILE_URI
         });
       });
-
 
       $("#save").on("tap",function(e){
         alert(petString[0]);

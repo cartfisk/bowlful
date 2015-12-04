@@ -31,3 +31,19 @@
 .yellow {
   border: 8px solid #ffff4d;
 }
+
+.facebook {
+  text-shadow: none !important;
+  color: #ffffff !important;
+  background-color: #3b5998 !important;
+  position: fixed;
+  bottom: 10px;
+  width: 298px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginbg {
+  background-image: url("/img/login.jpg");
+  height: 540px;
+}
