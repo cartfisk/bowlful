@@ -1,5 +1,5 @@
 (function () {
-  $(document).on("pageinit", "#home", function(e) {
+  $(document).on("pageinit", "#login", function(e) {
 		//prevent any bound defaults
 		e.preventDefault();
 		//loader function after deviceready event returns
