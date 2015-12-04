@@ -69,10 +69,10 @@
                 <a href="#managePets">Manage Pets</a>
               </li>
               <li data-filtertext="">
-                <a href="">Settings</a>
+                <a href="#settings">Settings</a>
               </li>
               <li data-filtertext="">
-                <a href="">Help</a>
+                <a href="#help">Help</a>
               </li>
             </ul>
         </div>
@@ -90,8 +90,30 @@
       </div>
       <!-- /Manage Pets Page -->
       <!-- Settings Page -->
+      <div data-role="page" id="settings">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <a href="#nav-panel" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Settings</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+        </div>
+        <!-- /Header -->
+      </div>
       <!-- /Settings Page -->
       <!-- Help Page -->
+      <div data-role="page" id="help">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <a href="#settings" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Help</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+        </div>
+        <!-- /Header -->
+      </div>
       <!-- /Help Page -->
     </body>
 </html>
