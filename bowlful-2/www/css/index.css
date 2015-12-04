@@ -1,3 +1,7 @@
+text {
+    font: 14px Calibri,Arial !important;
+}
+
 .pet {
   height: 100px;
   width: 100px;
@@ -47,3 +51,5 @@
   background-image: url("/img/login.jpg");
   height: 540px;
 }
+
+
