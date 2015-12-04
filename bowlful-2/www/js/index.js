@@ -153,8 +153,13 @@
       }
 
       function FeedDialog(id) {
+
         $("#confirmHeader h1").html(pets[id].name);
+        if(pets[id].lastFed.hour == ""){
+        $("#lastfed").html("");
+        } else{
         $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute);
+          }
 
 
         //$("#lastfed").html("Last fed: " + pets[id].lastFed.hour +":"+ pets[id].lastFed.minute + " // "+ pets[id].lastFed.day);
@@ -247,6 +252,14 @@
         newLastFed.hour = date.getHours();
 
         newLastFed.minute = date.getMinutes();
+        if(newLastFed.minute<= 9){
+          alert("Lastfed < 9");
+          newLastFed.minute = "0"+newLastFed.minute.toString();
+          parseInt(newLastFed.minute);
+        }
+        else{
+          newLastFed.minute= date.getMinutes();
+        }
 
         if ((Math.abs(currentTime-feedTimes.morning)) < (Math.abs(currentTime-feedTimes.evening))) {
           newLastFed.morning = true;
