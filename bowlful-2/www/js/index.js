@@ -4,11 +4,7 @@
 		e.preventDefault();
 		//loader function after deviceready event returns
 		function onDeviceReady() {
-
-
-
       var pets = [];
-
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
@@ -166,8 +162,8 @@
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
-/*
 
+      /*
       function testFeed(id, date) {
         pets[id].lastFed = UpdateLastFed(date);
         //$("#lastfed").html("Last fed: just now");
@@ -272,11 +268,6 @@
 
       $("#addPetConfirm").on("tap", function(e){
         addPet();
-        var stringThis = JSON.stringify(pets);
-        localStorage.setItem("pet",stringThis);
-        alert(stringThis);
-
-        alert("Storing pets");
       });
 
       $(".pets").on("tap", ".pet", function(e){
@@ -317,35 +308,27 @@
       $("#save").on("tap",function(e){
         alert(petString[0]);
 
-        });
+      });
 
 
+      //  onLaunch();
+      $(document).on("pause",onPause);
+      $(document).on("resume",onResume);
 
+      function onPause(){
+        var stringThis = JSON.stringify(pets);
+        localStorage.setItem("pet",stringThis);
+        alert(stringThis);
+        alert("Storing pets");
+      }
 
-
-
-
-    //  onLaunch();
-    $(document).on("pause",onPause);
-    $(document).on("resume",onResume);
-    }
-    function onPause(){
-
-
-    }
-
-
-  function onResume(){
-    navigator.notification.alert("Resuming now....");
-    var pet1 = localStorage.getItem("pets");
-    alert(pet1);
-
-    petString = JSON.parse(pet1);
-    alert(petString);
-
-
-
-    }
+      function onResume(){
+        navigator.notification.alert("Resuming now....");
+        var pet1 = localStorage.getItem("pets");
+        alert(pet1);
+        petString = JSON.parse(pet1);
+        alert(petString);
+      }
     		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
 
