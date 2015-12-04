@@ -1,7 +1,3 @@
-text {
-    font: 14px Calibri,Arial !important;
-}
-
 .pet {
   height: 100px;
   width: 100px;
@@ -51,5 +47,3 @@ text {
   background-image: url("/img/login.jpg");
   height: 540px;
 }
-
-
