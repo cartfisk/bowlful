@@ -153,15 +153,19 @@
       }
 
       function FeedDialog(id) {
-
         $("#confirmHeader h1").html(pets[id].name);
         if(pets[id].lastFed.hour == ""){
-        $("#lastfed").html("");
-        } else{
-        $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute);
+          $("#lastfed").html("");
+        } else {
+          if (pets[id].lastFed.hour > 12){
+            pets[id].lastFed.hour -= 12;
+            $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute + "pm");
+          } else if (pets[id].lastFed.hour === 12){
+            $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute + "pm");
+          } else {
+            $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute + "am");
           }
-
-
+        }
         //$("#lastfed").html("Last fed: " + pets[id].lastFed.hour +":"+ pets[id].lastFed.minute + " // "+ pets[id].lastFed.day);
         $("#confirm").popup("open");
       }
@@ -253,7 +257,7 @@
 
         newLastFed.minute = date.getMinutes();
         if(newLastFed.minute<= 9){
-          alert("Lastfed < 9");
+          //alert("Lastfed < 9");
           newLastFed.minute = "0"+newLastFed.minute.toString();
           parseInt(newLastFed.minute);
         }
@@ -273,6 +277,13 @@
       function onSuccess(imageData){
         imageTemp = imageData;
         $("body").pagecontainer("change", "#home", {transition: "fade"});
+        // $('body').on('pagecontainerload', function( event, ui ) {
+        //   if(ui.toPage[0] == $('#home')[0]) {
+        //     //$("#insert").append(ui.prevPage[0].id);
+        //     $("#addPet").popup("open");
+        //   }
+        // });
+        setTimeout(function(){ $("#addPet").popup("open") },2000);
       }
 
       function onFail(message){
@@ -323,14 +334,15 @@
         pets = JSON.parse(petString);
       }
 
-      $( 'body' ).on( 'pagecontainertransition', function( event, ui ) {
-        // if(ui.toPage[0] == $('#home')[0] ) {
-        //   $("#addPet").popup("open");
-        // }
-        if ( ui.prevPage[ 0 ].id == "#camera" && ui.toPage[ 0 ].id == "#home" ) {
-          $("#addPet").popup("open");
-        }
-      });
+      // $('body').on('pagecontainerload', function( event, ui ) {
+      //   if(ui.toPage[0] == $('#home')[0]) {
+      //     //$("#insert").append(ui.prevPage[0].id);
+      //     $("#addPet").popup("open");
+      //   }
+      //   // if ( ui.prevPage[ 0 ].id == "#camera" && ui.toPage[ 0 ].id == "#home" ) {
+      //   //   $("#addPet").popup("open");
+      //   // }
+      // });
 
 
       $("#addPetConfirm").on("tap", function(e){
@@ -396,8 +408,6 @@
       $("#loadDOM").on("tap", function(e){
         loadPets(pets);
       });
-
-
 
       $(document).on("pause",onPause);
       $(document).on("resume",onResume);
