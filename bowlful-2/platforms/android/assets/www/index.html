@@ -8,10 +8,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" type ="text/css" href="css/index.css" />
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+
         <title>BOWLFUL</title>
     </head>
 
@@ -27,7 +24,7 @@
         <!-- /Header -->
         <div role="main" class="ui-content">
           <div id="insert" class="pets">
-
+            <button id="tester">Tester</button>
           </div>
         </div>
 
@@ -70,10 +67,10 @@
                 <a href="#managePets">Manage Pets</a>
               </li>
               <li data-filtertext="">
-                <a href="">Settings</a>
+                <a href="#settings">Settings</a>
               </li>
               <li data-filtertext="">
-                <a href="">Help</a>
+                <a href="#help">Help</a>
               </li>
             </ul>
         </div>
@@ -107,18 +104,87 @@
       <div data-role="page" id="managePets">
         <!-- Header -->
         <div data-role="header">
-          <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button>
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
           <h3>Manage Pets</h3>
 
-          <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
         </div>
         <button id="save" class="ui-btn ui-corner-all ui-shadow">Save</button>
+        <!-- Placeholders entered by Matty and Dave, 2015/12/03. -->
+        <button id="edit" class="ui-btn ui-corner-all ui-shadow">Edit</button>
+        <button id="add" class="ui-btn ui-corner-all ui-shadow">Add</button>
+        <button id="remove" class="ui-btn ui-corner-all ui-shadow">Remove</button>
         <!-- /Header -->
       </div>
       <!-- /Manage Pets Page -->
       <!-- Settings Page -->
+      <div data-role="page" id="settings">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <!-- <a href="#nav-panel" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Settings</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+        </div>
+        <!-- /Header -->
+        <!-- Body -->
+        <div role="main" class="ui-content">
+          <!-- <p id="feedTime1" class="ui-title">Feed Time 1:</p> -->
+          <form id="feed1">
+            Feed Time 1:
+            <input type="time" name="feedTime1">
+          </form>
+          <form id="feed2">
+            Feed Time 2:
+            <input type="time" name="feedTime2">
+          </form>
+        </div>
+        <!-- /Body -->
+      </div>
       <!-- /Settings Page -->
       <!-- Help Page -->
+      <div data-role="page" id="help">
+        <!-- Header -->
+        <div data-role="header">
+          <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
+          <!-- <a href="#settings" class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-transition="slide" ></a> -->
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Help</h3>
+          <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
+        </div>
+        <!-- /Header -->
+        <!-- Body -->
+        <div role="main" class="ui-content">
+          <p>
+            On the HOME page, you will find your pets displayed. Each pet will have a colored ring around the pet image of your pet. If the ring is <span style="color: #b3ff66">GREEN</span>, your pet is happy. If the ring is <span style="color: #ffff4d">YELLOW</span>, Your pet is starting to get hungry. Finally, if the ring is <span style="color: #ff6666">RED</span>, your pet needs to be fed.
+          </p>
+          <p>
+            The ADD A PET popup from the HOME page, which is accessed by tapping the PLUS button in the upper right corner, allows you to add an additional pet. You will be prompted to provide a name and either take a photo or select one from the phone's gallery.
+          </p>
+          <p>
+            By Simply tapping the photo of your pet, you can bring up the FEED A PET pop up. The FEED A PET popup will ask you to confirm that the pet has been fed.
+          </p>
+          <p>
+            The SELECTION PANEL can be entered by tapping the BARS button in the upper left corner of the HOME page. In the SELECTION PANEL, you will see your ID and be able to navigate to the MANAGE PETS, SETTINGS, and HELP pages.
+          </p>
+          <p>
+            On the MANAGE PETS page, you may add or remove a pet from your profile. You can also select a pet and edit their name and photo.
+          </p>
+          <p>
+            On the SETTINGS page, you can select two feed times for your pet.
+          </p>
+          <p>
+            By clicking the HOME button, in the upper right corner of the MANAGE PETS, SETTINGS, and HELP pages, you can return to the HOME page.
+          </p>
+        </div>
+        <!-- /Body -->
+      </div>
       <!-- /Help Page -->
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

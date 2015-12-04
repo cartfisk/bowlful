@@ -4,11 +4,7 @@
 		e.preventDefault();
 		//loader function after deviceready event returns
 		function onDeviceReady() {
-
-
-
       var pets = [];
-
       var petQuantity = -1; //make this = pets.length or appt. array method
       var lastUpdate;
       var feedTimes = { //user changeable feeding times throughout the day, stored as integer minutes since 12:00am
@@ -20,8 +16,14 @@
       //use indexedDB to retrieve these values on launch
       var currentPet = -1;
       //var tick = window.setInterval(onTick, 10000);
-/*
+
       function onLaunch(){ //maybe try putting things in backwards order if it doesn't work
+        var petString = localStorage.getItem("pets");
+        pets = JSON.parse(petString);
+        loadPets(pets);
+      }
+
+      function genPets(){
         var date1, date2, current;
         testAddPet("Jack");
         date1 = new Date('December 1, 2015 17:00:00');
@@ -32,7 +34,7 @@
         current = new Date();
         UpdatePetStatus(current);
       }
-*/
+
       function onTick(){
         var date = new Date();
         UpdatePets(date);
@@ -142,16 +144,35 @@
         pets[id] = new Pet(name,photo,id);
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
       }
-/*
+
+      function addPet() {
+        $("#addPet").popup("close");
+        petQuantity += 1;
+        var id = petQuantity;
+        var name = $("#newPetName").val();
+        var photo = imageTemp;
+        pets[id] = new Pet(name,photo,id);
+        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
+      }
+
+      function loadPet(pet) {
+        $("#insert").append("<div class='pet green' id='pet" + pet.id + "'> <img src=" + pet.photo + " /> </div>");
+      }
+
+      function loadPets(pets) {
+        var quant = pets.length;
+        for (i=0;i<quant;i+=1){
+          loadPet(pets[i]);
+        }
+      }
+
       function testAddPet(name) {
         petQuantity += 1;
         var id = petQuantity;
-        var photo = "";
         pets[id] = new Pet(name,photo,id);
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src='img/images-" + id + ".jpg' /> </div>");
         $("#addPet").popup("close");
       }
-      */
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
@@ -166,13 +187,12 @@
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
-/*
+
 
       function testFeed(id, date) {
         pets[id].lastFed = UpdateLastFed(date);
-        //$("#lastfed").html("Last fed: just now");
+        $("#lastfed").html("Last fed: just now");
       }
-      */
 
       function UpdateLastFed(date) {
         var currentTime = 60 * date.getHours() + date.getMinutes();
@@ -263,6 +283,22 @@
         navigator.notification.alert("Failed because: " + message);
       }
 
+      function onPause(){
+        var stringThis = JSON.stringify(pets);
+        localStorage.setItem("pets",stringThis);
+        //alert(stringThis);
+        //alert("Storing pets");
+      }
+
+      function onResume(){
+        //navigator.notification.alert("Resuming now....");
+        var petString = localStorage.getItem("pets");
+        //alert(pet1);
+        pets = JSON.parse(petString);
+        loadPets(pets);
+        //alert(pets);
+      }
+
       $( 'body' ).on( 'pagecontainertransition', function( event, ui ) {
         if(ui.toPage[0] == $('#home')[0] ) {
           $("#addPet").popup("open");
@@ -272,11 +308,10 @@
 
       $("#addPetConfirm").on("tap", function(e){
         addPet();
-        var stringThis = JSON.stringify(pets);
-        localStorage.setItem("pet",stringThis);
-        alert(stringThis);
+      });
 
-        alert("Storing pets");
+      $("#tester").on("tap", function(e){
+        genPets();
       });
 
       $(".pets").on("tap", ".pet", function(e){
@@ -317,34 +352,13 @@
       $("#save").on("tap",function(e){
         alert(petString[0]);
 
-        });
+      });
 
 
 
-
-
-
-
-    //  onLaunch();
-    $(document).on("pause",onPause);
-    $(document).on("resume",onResume);
-    }
-    function onPause(){
-
-
-    }
-
-
-  function onResume(){
-    navigator.notification.alert("Resuming now....");
-    var pet1 = localStorage.getItem("pets");
-    alert(pet1);
-
-    petString = JSON.parse(pet1);
-    alert(petString);
-
-
-
+      $(document).on("pause",onPause);
+      $(document).on("resume",onResume);
+      onLaunch();
     }
     		//as deviceready returns load onDeviceReady()
     $(document).on("deviceready", onDeviceReady);
