@@ -23,18 +23,6 @@
         loadPets(pets);
       }
 
-      function genPets(){
-        var date1, date2, current;
-        testAddPet("Jack");
-        date1 = new Date('December 1, 2015 17:00:00');
-        testFeed(0, date1);
-        testAddPet("Goob");
-        date2 = new Date('December 2, 2015 09:00:00');
-        testFeed(1, date2);
-        current = new Date();
-        UpdatePetStatus(current);
-      }
-
       function onTick(){
         var date = new Date();
         UpdatePets(date);
@@ -145,16 +133,6 @@
         $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
       }
 
-      function addPet() {
-        $("#addPet").popup("close");
-        petQuantity += 1;
-        var id = petQuantity;
-        var name = $("#newPetName").val();
-        var photo = imageTemp;
-        pets[id] = new Pet(name,photo,id);
-        $("#insert").append("<div class='pet green' id='pet" + id + "'> <img src=" + photo + " /> </div>");
-      }
-
       function loadPet(pet) {
         $("#insert").append("<div class='pet green' id='pet" + pet.id + "'> <img src=" + pet.photo + " /> </div>");
       }
@@ -176,7 +154,10 @@
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
-        $("#lastfed").html("Last fed: " + pets[id].lastFed.day);
+        $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute);
+
+
+        //$("#lastfed").html("Last fed: " + pets[id].lastFed.hour +":"+ pets[id].lastFed.minute + " // "+ pets[id].lastFed.day);
         $("#confirm").popup("open");
       }
 
@@ -187,7 +168,6 @@
         $("#lastfed").html("Last fed: just now");
         $("#confirm").popup("close");
       }
-
 
       function testFeed(id, date) {
         pets[id].lastFed = UpdateLastFed(date);
@@ -242,29 +222,32 @@
         newLastFed.day = date.getDay();
         switch(newLastFed.day) {
           case 0:
-            newLastFed.day = "Sun";
+            newLastFed.day = "Sunday";
             break;
           case 1:
-            newLastFed.day = "Mon";
+            newLastFed.day = "Monday";
             break;
           case 2:
-            newLastFed.day = "Tues";
+            newLastFed.day = "Tuesday";
             break;
           case 3:
-            newLastFed.day = "Wed";
+            newLastFed.day = "Wednesday";
             break;
           case 4:
-            newLastFed.day = "Thur";
+            newLastFed.day = "Thursday";
             break;
           case 5:
-            newLastFed.day = "Fri";
+            newLastFed.day = "Friday";
             break;
           case 6:
-            newLastFed.day = "Sat";
+            newLastFed.day = "Saturday";
             break;
         }
+
         newLastFed.hour = date.getHours();
+
         newLastFed.minute = date.getMinutes();
+
         if ((Math.abs(currentTime-feedTimes.morning)) < (Math.abs(currentTime-feedTimes.evening))) {
           newLastFed.morning = true;
         }
@@ -299,8 +282,39 @@
         //alert(pets);
       }
 
+      //dev tools functions
+      function genPets(){
+        var date1, date2, current;
+        testAddPet("Jack");
+        date1 = new Date('December 1, 2015 17:00:00');
+        testFeed(0, date1);
+        testAddPet("Goob");
+        date2 = new Date('December 2, 2015 09:00:00');
+        testFeed(1, date2);
+        current = new Date();
+        UpdatePetStatus(current);
+      }
+
+      function clearLS(){
+        localStorage.setItem("pets","");
+      }
+      function clearDOM(){
+        $("insert").html("");
+      }
+      function savetoLS(){
+        var stringThis = JSON.stringify(pets);
+        localStorage.setItem("pets",stringThis);
+      }
+      function loadfromLS(){
+        var petString = localStorage.getItem("pets");
+        pets = JSON.parse(petString);
+      }
+
       $( 'body' ).on( 'pagecontainertransition', function( event, ui ) {
-        if(ui.toPage[0] == $('#home')[0] ) {
+        // if(ui.toPage[0] == $('#home')[0] ) {
+        //   $("#addPet").popup("open");
+        // }
+        if ( ui.prevPage[ 0 ].id == "#camera" && ui.toPage[ 0 ].id == "#home" ) {
           $("#addPet").popup("open");
         }
       });
@@ -308,10 +322,6 @@
 
       $("#addPetConfirm").on("tap", function(e){
         addPet();
-      });
-
-      $("#tester").on("tap", function(e){
-        genPets();
       });
 
       $(".pets").on("tap", ".pet", function(e){
@@ -352,6 +362,31 @@
       $("#save").on("tap",function(e){
         alert(petString[0]);
 
+      });
+
+      //dev tools e handlers
+      $("#tester").on("tap", function(e){
+        genPets();
+      });
+
+      $("#clearLS").on("tap", function(e){
+        clearLS();
+      });
+
+      $("#clearDOM").on("tap", function(e){
+        clearDOM();
+      });
+
+      $("#savetoLS").on("tap", function(e){
+        savetoLS();
+      });
+
+      $("#loadfromLS").on("tap", function(e){
+        loadfromLS();
+      });
+
+      $("#loadDOM").on("tap", function(e){
+        loadPets(pets);
       });
 
 

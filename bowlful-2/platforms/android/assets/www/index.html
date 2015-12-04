@@ -57,7 +57,7 @@
         <!-- /Header -->
         <div role="main" class="ui-content">
           <div id="insert" class="pets">
-            <button id="tester">Tester</button>
+
           </div>
         </div>
 
@@ -105,6 +105,9 @@
               <li data-filtertext="">
                 <a href="#help">Help</a>
               </li>
+              <li data-filtertext="">
+                <a href="#dev">Developer Tools</a>
+              </li>
             </ul>
         </div>
       </div>
@@ -140,7 +143,6 @@
           <!-- <button class = "ui-btn ui-shadow ui-corner-all  ui-icon-bars ui-btn-icon-notext" data-rel="back" data-transition="slide" ></button> -->
           <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
           <h3>Manage Pets</h3>
-
           <!-- <a href="#addPet" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext" data-transition="pop" ></a> -->
         </div>
         <button id="save" class="ui-btn ui-corner-all ui-shadow">Save</button>
@@ -148,9 +150,29 @@
         <button id="edit" class="ui-btn ui-corner-all ui-shadow">Edit</button>
         <button id="add" class="ui-btn ui-corner-all ui-shadow">Add</button>
         <button id="remove" class="ui-btn ui-corner-all ui-shadow">Remove</button>
+        <button id="tester">Generate Pets</button>
         <!-- /Header -->
       </div>
       <!-- /Manage Pets Page -->
+
+      <!-- Dev Tools -->
+      <div data-role="page" id="dev">
+        <div data-role="header">
+          <a href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext" data-transition="slide" ></a>
+          <h3>Manage Pets</h3>
+        </div>
+        <div role="main" class="ui-content">
+          <button id="tester">Tester</button>
+          <button id="clearLS">Clear LS</button>
+          <button id="clearDOM">Clear DOM</button>
+          <button id="savetoLS">Save to localStorage</button>
+          <button id="loadfromLS">Load from localStorage</button>
+          <button id="loadDOM">Load DOM from petsArray</button>
+        </div>
+      </div>
+      <!-- /Dev Tools -->
+
+
       <!-- Settings Page -->
       <div data-role="page" id="settings">
         <!-- Header -->

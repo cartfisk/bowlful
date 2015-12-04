@@ -154,7 +154,10 @@
 
       function FeedDialog(id) {
         $("#confirmHeader h1").html(pets[id].name);
-        $("#lastfed").html("Last fed: " + date.getHours() +":"+ date.getMinutes() +" // "+ pets[id].lastFed.day);
+        $("#lastfed").html("Last fed: "+ pets[id].lastFed.day + " - " + pets[id].lastFed.hour + ":" + pets[id].lastFed.minute);
+
+
+        //$("#lastfed").html("Last fed: " + pets[id].lastFed.hour +":"+ pets[id].lastFed.minute + " // "+ pets[id].lastFed.day);
         $("#confirm").popup("open");
       }
 
@@ -219,29 +222,32 @@
         newLastFed.day = date.getDay();
         switch(newLastFed.day) {
           case 0:
-            newLastFed.day = "Sun";
+            newLastFed.day = "Sunday";
             break;
           case 1:
-            newLastFed.day = "Mon";
+            newLastFed.day = "Monday";
             break;
           case 2:
-            newLastFed.day = "Tues";
+            newLastFed.day = "Tuesday";
             break;
           case 3:
-            newLastFed.day = "Wed";
+            newLastFed.day = "Wednesday";
             break;
           case 4:
-            newLastFed.day = "Thur";
+            newLastFed.day = "Thursday";
             break;
           case 5:
-            newLastFed.day = "Fri";
+            newLastFed.day = "Friday";
             break;
           case 6:
-            newLastFed.day = "Sat";
+            newLastFed.day = "Saturday";
             break;
         }
+
         newLastFed.hour = date.getHours();
+
         newLastFed.minute = date.getMinutes();
+
         if ((Math.abs(currentTime-feedTimes.morning)) < (Math.abs(currentTime-feedTimes.evening))) {
           newLastFed.morning = true;
         }
