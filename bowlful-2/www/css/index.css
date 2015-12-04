@@ -14,10 +14,10 @@
   height: inherit;
   width: inherit;
   border-radius: 50%;
-  object-fit: contain; /* Do not scale the image */
+  object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
-  height: 100px;
-  width: 100px;
+  /*height: 100px;
+  width: 100px;*/
 }
 
 .green {
